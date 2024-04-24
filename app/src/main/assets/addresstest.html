@@ -1,0 +1,29 @@
+﻿<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function openZipSearch() {
+    new daum.Postcode({
+    	oncomplete: function(data) {     
+		var addr = ''; 
+		if (data.userSelectedType === 'R') { 
+			addr = data.roadAddress;
+		} else {
+			addr = data.jibunAddress;
+		}
+
+		$("#zip_code").val(data.zonecode);
+		$("#addr").val(addr);
+		$("#addr_dtl").val("");
+		$("#addr_dtl").focus();
+        }
+    }).open();
+}
+</script>
+<div>
+	<label>주소</label>
+	<div>
+		<input type="text"  id="zip_code" name="zip_code" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호" style="width:250px;">
+		<input type="text"  id="addr" name="addr" onclick="openZipSearch();" readonly="readonly" placeholder="기본주소"  style="width:250px;">
+		<input type="text"  id="addr_dtl" name="addr_dtl" placeholder="상세주소"  style="width:250px;">
+	</div>
+</div>
